@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductRepository extends JpaRepository<ProductModel, String> {
 
-    boolean existsBySerialNumber(String serialNumber);
+    boolean existsByPartNumber(String partNumber);
 }

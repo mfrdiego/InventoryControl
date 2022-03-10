@@ -25,9 +25,9 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<Object> saveProduct(@RequestBody @Valid ProductDto productDto){
-        //verificação antes de salvar se existe algum serialNumber
-        if (productService.existsBySerialNumber(productDto.getSerialNumber())){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(("Serial number in use"));
+        //verificação antes de salvar se existe algum partNumber
+        if (productService.existsByPartNumber(productDto.getPartNumber())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(("Part number in use"));
         }
         ProductModel productModel = new ProductModel();
         BeanUtils.copyProperties(productDto, productModel);
@@ -37,31 +37,31 @@ public class ProductController {
     public ResponseEntity<List<ProductModel>> getAllProduct(){
         return ResponseEntity.status(HttpStatus.OK).body(productService.findAll());
     }
-    @GetMapping("/{serialNumber}")
-    public ResponseEntity<Object> getBuscaSerialNumber(@PathVariable(value = "serialNumber") String serialNumber) {
-        Optional<ProductModel> productModelOptional = productService.findBySerialNumber(serialNumber);
+    @GetMapping("/{partNumber}")
+    public ResponseEntity<Object> getBuscaPartNumber(@PathVariable(value = "partNumber") String partNumber) {
+        Optional<ProductModel> productModelOptional = productService.findByPartNumber(partNumber);
         if (!productModelOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("serial number not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Part number not found");
         }
         return ResponseEntity.status(HttpStatus.OK).body(productModelOptional.get());
     }
 
-    @DeleteMapping("/{serialNumber}")
-    public ResponseEntity<Object> deleteSerialNumber(@PathVariable(value = "serialNumber") String cpf) {
-        Optional<ProductModel> productModelOptional = productService.findBySerialNumber(cpf);
+    @DeleteMapping("/{partyNumber}")
+    public ResponseEntity<Object> deletePartNumber(@PathVariable(value = "partNumber") String partNumber) {
+        Optional<ProductModel> productModelOptional = productService.findByPartNumber(partNumber);
         if (!productModelOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("serial number not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Part number not found");
         }
         productService.delete(productModelOptional.get());
-        return ResponseEntity.status(HttpStatus.OK).body("serial number successfully deleted");
+        return ResponseEntity.status(HttpStatus.OK).body("Part number successfully deleted");
     }
 
-    @PutMapping("/{serialNumber}")
-    public ResponseEntity<Object> atualizarProduct(@PathVariable(value = "serialNumber") String serialNumber,
+    @PutMapping("/{partNumber}")
+    public ResponseEntity<Object> atualizarProduct(@PathVariable(value = "partNumber") String serialNumber,
                                                    @RequestBody @Valid ProductDto productDto) {
-        Optional<ProductModel> productModelOptional = productService.findBySerialNumber(serialNumber);
+        Optional<ProductModel> productModelOptional = productService.findByPartNumber(serialNumber);
         if (!productModelOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Serial number not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Part number not found");
         }
         ProductModel productModel = productModelOptional.get();
         productModel.setName(productDto.getName());

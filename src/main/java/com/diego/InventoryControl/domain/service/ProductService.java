@@ -21,16 +21,16 @@ public class ProductService {
     public ProductModel save(ProductModel productModel) {
         return productRepository.save(productModel);
     }
-    public boolean existsBySerialNumber(String serialNumber) {
-        return productRepository.existsBySerialNumber(serialNumber);
+    public boolean existsByPartNumber(String PartNumber) {
+        return productRepository.existsByPartNumber(PartNumber);
     }
 
     public List<ProductModel> findAll() {
         return productRepository.findAll();
     }
 
-    public Optional<ProductModel> findBySerialNumber(String serialNumber) {
-        return productRepository.findById(serialNumber);
+    public Optional<ProductModel> findByPartNumber(String partNumber) {
+        return productRepository.findById(partNumber);
     }
 
     @Transactional

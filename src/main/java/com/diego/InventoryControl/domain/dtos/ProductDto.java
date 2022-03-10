@@ -12,7 +12,7 @@ public class ProductDto {
 
     @NotBlank
     @Size(max = 50)
-    private String serialNumber;
+    private String partNumber;
 
     @NotBlank
     private String name;

@@ -14,7 +14,7 @@ public class ProductModel {
 
     @Id
     @Column(nullable = false, length = 50)
-    private String serialNumber;
+    private String partNumber;
 
     @Column(nullable = false, length = 100)
     private String name;

@@ -38,7 +38,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(productService.findAll());
     }
     @GetMapping("/{partNumber}")
-    public ResponseEntity<Object> getBuscaPartNumber(@PathVariable(value = "partNumber") String partNumber) {
+    public ResponseEntity<Object> getFindPartNumber(@PathVariable(value = "partNumber") String partNumber) {
         Optional<ProductModel> productModelOptional = productService.findByPartNumber(partNumber);
         if (!productModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Part number not found");
@@ -46,7 +46,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(productModelOptional.get());
     }
 
-    @DeleteMapping("/{partyNumber}")
+    @DeleteMapping("/{partNumber}")
     public ResponseEntity<Object> deletePartNumber(@PathVariable(value = "partNumber") String partNumber) {
         Optional<ProductModel> productModelOptional = productService.findByPartNumber(partNumber);
         if (!productModelOptional.isPresent()) {
@@ -57,9 +57,9 @@ public class ProductController {
     }
 
     @PutMapping("/{partNumber}")
-    public ResponseEntity<Object> atualizarProduct(@PathVariable(value = "partNumber") String serialNumber,
+    public ResponseEntity<Object> upadateProduct(@PathVariable(value = "partNumber") String partNumber,
                                                    @RequestBody @Valid ProductDto productDto) {
-        Optional<ProductModel> productModelOptional = productService.findByPartNumber(serialNumber);
+        Optional<ProductModel> productModelOptional = productService.findByPartNumber(partNumber);
         if (!productModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Part number not found");
         }
